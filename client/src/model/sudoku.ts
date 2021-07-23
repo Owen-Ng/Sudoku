@@ -2,9 +2,9 @@
 
 export default class Sudoku {
 
-    board: string[][]
-    reset: string[][]
-    constructor(board: string[][]) {
+    board: number[][]
+    reset: number[][]
+    constructor(board: number[][]) {
         this.reset = JSON.parse(JSON.stringify(board));
         this.board = JSON.parse(JSON.stringify(board)); //deep copy
     }
@@ -18,7 +18,7 @@ export default class Sudoku {
     solveSudoku() {
         this.solve(this.board, 0, 0);
     }
-    isValid(board: string[][], row: number, col: number, val: string) {
+    isValid(board: number[][], row: number, col: number, val: number) {
         //looking at the row only
         for (let i of board[row]) {
             if (i === val) {
@@ -44,7 +44,7 @@ export default class Sudoku {
         return true;
 
     }
-    solve(board: string[][], row: number, col: number): Boolean {
+    solve(board: number[][], row: number, col: number): Boolean {
         if (row === board.length) {
             return true;
         }
@@ -54,19 +54,19 @@ export default class Sudoku {
             newrow += 1
             newcol = 0
         }
-        if (board[row][col] !== ".") {
+        if (board[row][col] !== 0) {
             return this.solve(board, newrow, newcol)
         }
 
 
         for (let i = 1; i < 10; i++) {
-            if (this.isValid(board, row, col, i.toString())) {
-                board[row][col] = i.toString();
+            if (this.isValid(board, row, col, i)) {
+                board[row][col] = i;
                 if (this.solve(board, newrow, newcol)) {
                     return true;
                 }
 
-                board[row][col] = ".";
+                board[row][col] = 0;
             }
 
         }

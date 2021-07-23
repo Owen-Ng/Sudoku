@@ -1,7 +1,7 @@
 import React from "react";
 
 interface IProps {
-    board: string[][]
+    board: number[][]
 }
 export const Board: React.FC<IProps> = (props) => {
     const { board } = props;
@@ -16,7 +16,7 @@ export const Board: React.FC<IProps> = (props) => {
                         <tr key={res[0] + Math.random()}>
                             {res.map(res =>
 
-                                <td key={res[0] + Math.random()}>{res === "." ? " " : res}</td>
+                                <td key={res + Math.random()}>{res === 0 ? " " : res}</td>
                             )}
                         </tr>
                     )

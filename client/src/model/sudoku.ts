@@ -5,7 +5,7 @@ export default class Sudoku {
     board: string[][]
     reset: string[][]
     constructor(board: string[][]) {
-        this.reset = board;
+        this.reset = JSON.parse(JSON.stringify(board));
         this.board = JSON.parse(JSON.stringify(board)); //deep copy
     }
     resetBoard() {
@@ -17,7 +17,6 @@ export default class Sudoku {
     }
     solveSudoku() {
         this.solve(this.board, 0, 0);
-        console.log(this.board)
     }
     isValid(board: string[][], row: number, col: number, val: string) {
         //looking at the row only

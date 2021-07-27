@@ -3,7 +3,8 @@ import React from "react";
 
 interface IProps {
     board: number[][],
-    solveBoard?: number[][]
+    solveBoard?: number[][],
+    Celebration: React.Dispatch<React.SetStateAction<boolean>>
 }
 export const Board: React.FC<IProps> = (props) => {
     const { board } = props;
@@ -47,16 +48,15 @@ export const Board: React.FC<IProps> = (props) => {
                     }, 1000);
 
                 }
-
-
-
-
             })
 
         }
         )
         if (redCount === 0 && greenCount > 0) {
-            alert("Nice You finished it")
+
+
+            props.Celebration(true);
+
         }
     }
 

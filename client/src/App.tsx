@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import logo from './logo.svg';
+import "./winning.scss"
 import './App.css';
 import Sudoku from "./model/sudoku";
 import { Board } from "./components/Board";
@@ -31,7 +32,7 @@ function App() {
 
   const [Table, setTable] = useState<number[][]>([[0, 5, 0, 0, 9, 7, 0, 1, 0], [0, 0, 0, 0, 4, 5, 7, 0, 0], [0, 0, 0, 0, 3, 0, 2, 4, 0], [0, 0, 2, 0, 5, 8, 6, 0, 7], [0, 0, 0, 3, 7, 9, 0, 0, 0], [0, 0, 7, 0, 0, 2, 0, 5, 0], [5, 0, 0, 0, 8, 0, 0, 0, 0], [0, 7, 0, 9, 0, 0, 5, 0, 0], [9, 0, 3, 5, 6, 1, 8, 7, 2]])
   const [solveTable, setsolveTable] = useState<number[][]>()
-
+  const [Celebration, setCelebration] = useState<boolean>(false);
 
   useEffect(() => {
     sudoku = new Sudoku(JSON.parse(JSON.stringify(Table)));
@@ -41,11 +42,13 @@ function App() {
 
   function Reset() {
     setTable(JSON.parse(JSON.stringify(sudoku.resetBoard())));
+    setCelebration(false)
   }
 
   function Solve() {
     // sudoku.solveSudoku();
     setTable(JSON.parse(JSON.stringify(sudoku.getBoard())))
+    setCelebration(false)
   }
   function Lvl(lvl: string) {
     fetch(`https://sugoku.herokuapp.com/board?difficulty=${lvl}`).then(res => {
@@ -54,10 +57,12 @@ function App() {
       setTable(res.board);
       sudoku = new Sudoku(JSON.parse(JSON.stringify(res.board)));
       sudoku.solveSudoku();
-      sudoku.getBoard();
+      setsolveTable(sudoku.getBoard());
       sudoku.resetBoard();
+      setCelebration(false)
     })
   }
+
 
 
 
@@ -67,9 +72,18 @@ function App() {
       <LvlButton onClick={() => Lvl('easy')} style={{ backgroundColor: '#7a7af2' }}>Easy</LvlButton>
       <LvlButton onClick={() => Lvl('medium')} style={{ backgroundColor: 'yellow' }}>Medium</LvlButton>
       <LvlButton onClick={() => Lvl('hard')} style={{ backgroundColor: 'red' }}>Hard</LvlButton>
-      <Board board={Table} solveBoard={solveTable} />
+      <Board board={Table} solveBoard={solveTable} Celebration={setCelebration} />
       <Button onClick={Reset}>Reset</Button>
       <Button onClick={Solve}>Solve</Button>
+
+      {Celebration ?
+        <div className="pyro">
+          <div className="before"></div>
+          <div className="after"></div>
+        </div>
+
+        : ""}
+
 
     </div>
   );

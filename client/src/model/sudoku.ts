@@ -4,9 +4,28 @@ export default class Sudoku {
 
     board: number[][]
     reset: number[][]
+    updatedboard: number[][]
     constructor(board: number[][]) {
         this.reset = JSON.parse(JSON.stringify(board));
         this.board = JSON.parse(JSON.stringify(board)); //deep copy
+        this.updatedboard = JSON.parse(JSON.stringify(board));
+    }
+    findEmptySpot() {
+        let l: number[][] = [];
+        const tmp = this.reset;
+        [...Array(tmp.length).keys()].map(row => {
+            [...Array(tmp[row].length).keys()].map(col => {
+                if (tmp[row][col] === 0) {
+                    l.push([row, col])
+                }
+            })
+        })
+        return l;
+
+    }
+    updateBoard(B: number[][]) {
+        this.updatedboard = JSON.parse(JSON.stringify(B));
+
     }
     resetBoard() {
         return this.reset;

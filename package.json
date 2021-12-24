@@ -1,0 +1,27 @@
+{
+  "name": "sudoku",
+  "version": "1.0.0",
+  "description": "![image](https://user-images.githubusercontent.com/54727272/127093473-22fb30c0-99cf-4a58-8857-ff66eb3102ce.png)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Owen-Ng/Sudoku.git"
+  },
+  "author": "Owen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Owen-Ng/Sudoku/issues"
+  },
+  "homepage": "https://github.com/Owen-Ng/Sudoku#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "date-and-time": "^2.0.1",
+    "express": "^4.17.2",
+    "express-session": "^1.17.2"
+  }
+}

@@ -20,6 +20,7 @@ td, th {
   width: 10px;
   height: 25px;
   border-color: black;
+  z-index: 2;
 }
 
 table{
